@@ -46,12 +46,12 @@ def python_to_feed_generator(
         for content in message["contents"]:
             content_type = content.get("type")
             if content_type == telegram_types.TEXT.name:
-                fe.title(content.get("content"))
+                fe.title(channel_title)
                 fe.category({"term": telegram_types.TEXT.name})
                 fe.description(fe.description() + f'<p>{content.get("content")}</p>')
             elif content_type == telegram_types.PHOTO.name:
                 if not fe.title():
-                    fe.title(f"{telegram_types.PHOTO.name} {fe.id()}")
+                    fe.title(channel_title)
                 fe.category({"term": telegram_types.PHOTO.name})
                 fe.description(
                     fe.description()
@@ -59,7 +59,7 @@ def python_to_feed_generator(
                 )
             elif content_type == telegram_types.VIDEO.name:
                 if not fe.title():
-                    fe.title(f"{telegram_types.VIDEO.name} {fe.id()}")
+                    fe.title(channel_title)
                 fe.category({"term": telegram_types.VIDEO.name})
                 fe.description(
                     fe.description()
@@ -71,7 +71,7 @@ def python_to_feed_generator(
                 )
             elif content_type == telegram_types.VOICE.name:
                 if not fe.title():
-                    fe.title(f"{telegram_types.VOICE.name} {fe.id()}")
+                    fe.title(channel_title)
                 fe.category({"term": telegram_types.VOICE.name})
                 fe.description(
                     fe.description()
@@ -85,7 +85,7 @@ def python_to_feed_generator(
                 )
             elif content_type == telegram_types.DOCUMENT.name:
                 if not fe.title():
-                    fe.title(f"{telegram_types.DOCUMENT.name} {fe.id()}")
+                    fe.title(channel_title)
                 fe.category({"term": telegram_types.DOCUMENT.name})
                 fe.description(
                     fe.description()
@@ -97,7 +97,7 @@ def python_to_feed_generator(
                 )
             elif content_type == telegram_types.LOCATION.name:
                 if not fe.title():
-                    fe.title(f"{telegram_types.LOCATION.name} {fe.id()}")
+                    fe.title(channel_title)
                 fe.category({"term": telegram_types.LOCATION.name})
                 fe.description(
                     fe.description()
@@ -109,7 +109,7 @@ def python_to_feed_generator(
                 )
             elif content_type == telegram_types.POLL.name:
                 if not fe.title():
-                    fe.title(content.get(telegram_types.POLL_QUESTION.name))
+                    fe.title(channel_title)
                 fe.category({"term": telegram_types.POLL.name})
                 fe.description(
                     fe.description()
@@ -135,7 +135,7 @@ def python_to_feed_generator(
                 )
             elif content_type == telegram_types.STICKER.name:
                 if not fe.title():
-                    fe.title(f"{telegram_types.STICKER.name} {fe.id()}")
+                    fe.title(channel_title)
                 fe.category({"term": telegram_types.STICKER.name})
                 fe.description(
                     fe.description()
@@ -143,7 +143,7 @@ def python_to_feed_generator(
                 )
             elif content_type == telegram_types.UNSUPPORTED_MEDIA.name:
                 if not fe.title():
-                    fe.title(f"{telegram_types.UNSUPPORTED_MEDIA.name} {fe.id()}")
+                    fe.title(channel_title)
                 fe.category({"term": telegram_types.UNSUPPORTED_MEDIA.name})
                 fe.description(
                     fe.description()
