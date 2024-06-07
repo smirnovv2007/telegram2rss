@@ -212,24 +212,27 @@ class TGChannel:
                             telegram_types.VIDEO_DURATION.name: video_duration,
                         }
                     )
-                except Exception as e:
-                    print(e)
+                except:
+                    pass
 
             # Get voices urls and durations.
             voices = bubble.select(telegram_types.VOICE.selector)
             for voice in voices:
-                voice_url = voice.select_one(telegram_types.VOICE_URL.selector)["src"]
-                voice_duration = voice.select_one(
-                    telegram_types.VOICE_DURATION.selector
-                ).text
-
-                contents.append(
-                    {
-                        "type": telegram_types.VOICE.name,
-                        "url": voice_url,
-                        telegram_types.VOICE_DURATION.name: voice_duration,
-                    }
-                )
+                try:
+                    voice_url = voice.select_one(telegram_types.VOICE_URL.selector)["src"]
+                    voice_duration = voice.select_one(
+                        telegram_types.VOICE_DURATION.selector
+                    ).text
+    
+                    contents.append(
+                        {
+                            "type": telegram_types.VOICE.name,
+                            "url": voice_url,
+                            telegram_types.VOICE_DURATION.name: voice_duration,
+                        }
+                    )
+                except:
+                    pass
 
             # Get documents urls and sizes.
             documents = bubble.select(telegram_types.DOCUMENT.selector)
