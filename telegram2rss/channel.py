@@ -193,24 +193,25 @@ class TGChannel:
             # Get videos urls, thumbnails and durations.
             videos = bubble.select(telegram_types.VIDEO.selector)
             for video in videos:
-                video_url = video.select_one(telegram_types.VIDEO_ELEMENT.selector)[
-                    "src"
-                ]
-                # TODO: proxy video thumbnail and sava it as base64.
-                video_thumb_url = video.select_one(telegram_types.VIDEO_THUMB.selector)[
-                    "style"
-                ].split("'")[1]
-                video_duration = video.select_one(
-                    telegram_types.VIDEO_DURATION.selector
-                ).text
-                contents.append(
-                    {
-                        "type": telegram_types.VIDEO.name,
-                        "url": video_url,
-                        telegram_types.VIDEO_THUMB.name: video_thumb_url,
-                        telegram_types.VIDEO_DURATION.name: video_duration,
-                    }
-                )
+                if telegram_types.VIDEO_ELEMENT.selector is not None:
+                    video_url = video.select_one(telegram_types.VIDEO_ELEMENT.selector)[
+                        "src"
+                    ]
+                    # TODO: proxy video thumbnail and sava it as base64.
+                    video_thumb_url = video.select_one(telegram_types.VIDEO_THUMB.selector)[
+                        "style"
+                    ].split("'")[1]
+                    video_duration = video.select_one(
+                        telegram_types.VIDEO_DURATION.selector
+                    ).text
+                    contents.append(
+                        {
+                            "type": telegram_types.VIDEO.name,
+                            "url": video_url,
+                            telegram_types.VIDEO_THUMB.name: video_thumb_url,
+                            telegram_types.VIDEO_DURATION.name: video_duration,
+                        }
+                    )
 
             # Get voices urls and durations.
             voices = bubble.select(telegram_types.VOICE.selector)
