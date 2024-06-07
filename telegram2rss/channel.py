@@ -193,7 +193,7 @@ class TGChannel:
             # Get videos urls, thumbnails and durations.
             videos = bubble.select(telegram_types.VIDEO.selector)
             for video in videos:
-                if telegram_types.VIDEO_ELEMENT.selector is not None:
+                try:
                     video_url = video.select_one(telegram_types.VIDEO_ELEMENT.selector)[
                         "src"
                     ]
@@ -212,6 +212,8 @@ class TGChannel:
                             telegram_types.VIDEO_DURATION.name: video_duration,
                         }
                     )
+                except Exception as e:
+                    print(e)
 
             # Get voices urls and durations.
             voices = bubble.select(telegram_types.VOICE.selector)
